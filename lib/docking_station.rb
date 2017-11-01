@@ -10,6 +10,7 @@ def release_bike
 end
 
 def dock(bike)
+  fail "Sorry, there are no free slots to dock a bike" if @bike
   @bike = bike
 end
 

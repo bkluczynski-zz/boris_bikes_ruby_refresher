@@ -29,4 +29,11 @@ describe DockingStation do
     expect { subject.release_bike }.to raise_error("Sorry, there are no bikes available for hire")
   end
 
+  it 'raises error when there are too many bikes' do
+    bike = Bike.new
+    subject.dock(bike)
+    bike2 = Bike.new
+    expect { subject.dock(bike2) }.to raise_error("Sorry, there are no free slots to dock a bike")
+  end
+
 end
