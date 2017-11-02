@@ -3,6 +3,7 @@ require "docking_station"
 describe DockingStation do
 
   let(:bike) { double :bike }
+  let(:bike2){ double :bike2 }
 
   it { is_expected.to respond_to :release_bike }
 
@@ -41,5 +42,13 @@ describe DockingStation do
     expect(subject.dock(bike)).to eq [bike]
   end
 
+  it 'can return all broken bikes' do
+    allow(bike).to receive(:working?).and_return(true)
+    8.times { subject.dock bike }
+    allow(bike2).to receive(:working?).and_return(false)
+    9.times { subject.dock bike2 }
+    expect(subject.release_broken_bikes.length).to be(9)
+    expect(subject.count_bikes).to be(8)
+  end
 
 end
