@@ -11,9 +11,10 @@ class DockingStation
     @capacity = capacity;
   end
 
-  def release_bike
+  def release_bike(bike)
     fail "Sorry, there are no bikes available for hire" if no_bikes_remaining?
-    bikes.pop
+    fail "Sorry, this bike is broken" if bike.broken?
+    bikes.delete(bike)
   end
 
   def dock(bike)

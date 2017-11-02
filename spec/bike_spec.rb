@@ -8,6 +8,12 @@ describe Bike do
   expect(bike).to be_working
   end
 
+  it "can be broken" do
+  bike = Bike.new
+  bike.report_broken
+  expect(bike).to be_broken
+  end
+
 
 
 end
