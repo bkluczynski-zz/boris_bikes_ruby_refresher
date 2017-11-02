@@ -14,7 +14,7 @@ describe DockingStation do
   it 'docks something' do
     bike = Bike.new
     # We want to return the bike we dock
-    expect(subject.dock(bike)).to eq bike
+    expect(subject.dock(bike)).to eq [bike]
   end
 
   # let's update our test for #bike
@@ -22,18 +22,16 @@ describe DockingStation do
     bike = Bike.new
     subject.dock(bike)
     # Again, we need to return the bike we just docked
-    expect(subject.bike).to eq bike
+    expect(subject.bikes[0]).to eq bike
   end
 
   it 'raises error when there is no bikes available' do
     expect { subject.release_bike }.to raise_error("Sorry, there are no bikes available for hire")
   end
 
-  it 'raises error when there are too many bikes' do
-    bike = Bike.new
-    subject.dock(bike)
-    bike2 = Bike.new
-    expect { subject.dock(bike2) }.to raise_error("Sorry, there are no free slots to dock a bike")
+  it 'has a default capacity of 20 bikes' do
+    20.times { subject.dock Bike.new }
+    expect { subject.dock(Bike.new) }.to raise_error("Sorry, there are no free slots to dock a bike")
   end
 
 end
