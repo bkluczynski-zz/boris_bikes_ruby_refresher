@@ -17,10 +17,4 @@ class Garage < StoringFacility
     bike
   end
 
-  def dock(bike)
-    bikes.push(bike)
-  end
-
-
-
 end
