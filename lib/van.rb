@@ -2,23 +2,21 @@ require_relative 'docking_station'
 
 class Van
 
-  attr_reader :bikes_storage, :garage
+  attr_reader :bikes_storage
 
-  def initialize(garage = Garage.new)
+  def initialize
     @bikes_storage = [];
-    @garage = garage
   end
 
   def receive_broken_bikes(bikes)
     bikes.map{|bike| bikes_storage << bike}
   end
 
-  def deliver_bikes
+  def deliver_bikes_to= (destination)
     bikes_storage.map{|bike|
-      garage.bikes << bikes_storage.delete(bike)
+      destination.dock(bikes_storage.delete(bike))
     }
   end
-
 
 
 end

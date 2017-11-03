@@ -51,4 +51,5 @@ describe DockingStation do
     expect(subject.count_bikes).to be(8)
   end
 
+
 end
