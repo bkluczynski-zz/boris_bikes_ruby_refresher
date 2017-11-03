@@ -1,13 +1,14 @@
 require_relative 'bike'
+require_relative 'storing_facility'
 
-class DockingStation
+class DockingStation < StoringFacility
 
   DEFAULT_CAPACITY = 20;
 
   attr_accessor :capacity
 
   def initialize(capacity = DEFAULT_CAPACITY)
-    @bikes = [];
+    super()
     @capacity = capacity;
   end
 

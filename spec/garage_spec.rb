@@ -16,6 +16,7 @@ describe Garage do
     van.bikes_storage << bike
     van.deliver_bikes_to=(garage)
     expect { garage.repair_bikes }.to change { bike.working? }.from(false).to(true)
+    expect(garage.bikes[0]).to eq(bike)
   end
 
 
