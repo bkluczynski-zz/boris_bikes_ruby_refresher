@@ -5,7 +5,6 @@ describe Van do
   let(:bike) { double :bike }
   let(:bike2){ double :bike2 }
   station = DockingStation.new
-
   it 'has storage to store bikes' do
     expect(subject.bikes_storage.length).to be(0)
   end
@@ -19,4 +18,10 @@ describe Van do
     expect(subject.bikes_storage.length).to be(9)
   end
 
+  it 'takes broken bikes to Garage' do
+    allow(bike2).to receive(:working?).and_return(false)
+    7.times { subject.bikes_storage <<  bike2 }
+    expect { subject.deliver_bikes} .to change { subject.bikes_storage.length }.from(7).to(0)
+  end
+ 
 end

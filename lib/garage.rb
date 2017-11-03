@@ -6,7 +6,7 @@ class Garage
     @bikes = [];
   end
 
-  def repair_bikes(bikes)
+  def repair_bikes
     bikes.map!{ |bike| bike.repair }
   end
 

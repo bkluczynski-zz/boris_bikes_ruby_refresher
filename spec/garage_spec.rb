@@ -1,8 +1,11 @@
 require 'garage'
+require 'van'
 
 describe Garage do
 
   bike = Bike.new
+  garage = Garage.new
+  van = Van.new(garage)
 
   it 'has a dedicated space to repair bikes' do
     expect(subject.bikes.length).to eq(0)
@@ -10,10 +13,12 @@ describe Garage do
 
   it 'repairs broken bikes' do
     bike.report_broken
-    brokenBikes = [];
-    brokenBikes << bike
-    expect { subject.repair_bikes(brokenBikes) }.to change { bike.working? }.from(false).to(true)
+    van.bikes_storage << bike
+    van.deliver_bikes
+    expect { garage.repair_bikes }.to change { bike.working? }.from(false).to(true)
   end
+
+
 
 
 end
