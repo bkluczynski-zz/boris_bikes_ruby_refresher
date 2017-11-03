@@ -18,4 +18,8 @@ class Bike
     working == false
   end
 
+  def repair
+    self.working = true
+  end
+
 end
