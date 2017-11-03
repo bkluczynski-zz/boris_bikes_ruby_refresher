@@ -1,8 +1,7 @@
-require_relative 'storing_facility'
+require 'bike_container'
 
-class Garage < StoringFacility
 
-  attr_reader :bikes
+class Garage < BikeContainer
 
   def initialize
     super()

@@ -1,39 +1,40 @@
 require_relative 'bike'
-require_relative 'storing_facility'
+require_relative 'bike_container'
 
-class DockingStation < StoringFacility
+class DockingStation < BikeContainer
 
-  DEFAULT_CAPACITY = 20;
-
-  attr_accessor :capacity
-
-  def initialize(capacity = DEFAULT_CAPACITY)
+  def initialize()
     super()
-    @capacity = capacity;
   end
 
   def release_bike(bike)
     fail "Sorry, there are no bikes available for hire" if no_bikes_remaining?
     fail "Sorry, this bike is broken" if bike.broken?
-    bikes.delete(bike)
+    remove_bike(bike)
   end
 
   def dock(bike)
     fail "Sorry, there are no free slots to dock a bike" if station_full?
-    bikes.push(bike)
+    add(bike)
   end
 
   def release_broken_bikes
-    bikes.select{ |bike| bike.working? == false }.map!{ |selectedBike| bikes.delete(selectedBike) }
+    bikes.select{ |bike| select_working_bike(bike) }.map!{ |selectedBike| remove_bike(selectedBike) }
   end
 
   def count_bikes
     bikes.count
   end
 
-    private
+  def select_working_bike(bike)
+    bike.working? == false
+  end
 
-    attr_reader :bikes
+  def remove_bike(bike)
+    bikes.delete(bike)
+  end
+
+    private
 
     def no_bikes_remaining?
       bikes.empty?
