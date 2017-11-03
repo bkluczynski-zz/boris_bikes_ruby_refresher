@@ -30,10 +30,6 @@ class DockingStation < BikeContainer
     bike.working? == false
   end
 
-  def remove_bike(bike)
-    bikes.delete(bike)
-  end
-
     private
 
     def no_bikes_remaining?
